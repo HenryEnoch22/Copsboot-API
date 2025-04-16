@@ -3,13 +3,14 @@ package mx.uv.hefv.SpringBoot_API.jpa;
 import java.util.Objects;
 
 import jakarta.persistence.EmbeddedId;
-//import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-//@MappedSuperclass
+@MappedSuperclass
 public abstract class AbstractEntity <T extends EntityId> implements Entity<T>{
+    
     @EmbeddedId
     private T id;
 
