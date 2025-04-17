@@ -3,9 +3,9 @@ package mx.uv.hefv.SpringBoot_API.service.user;
 import org.springframework.stereotype.Service;
 
 import mx.uv.hefv.SpringBoot_API.jpa.UserId;
-import mx.uv.hefv.SpringBoot_API.model.AuthServerId;
-import mx.uv.hefv.SpringBoot_API.model.CreateUserParameters;
-import mx.uv.hefv.SpringBoot_API.model.User;
+import mx.uv.hefv.SpringBoot_API.model.user.AuthServerId;
+import mx.uv.hefv.SpringBoot_API.model.user.CreateUserParameters;
+import mx.uv.hefv.SpringBoot_API.model.user.User;
 import mx.uv.hefv.SpringBoot_API.repository.user.UserRepository;
 
 import java.util.Optional;
@@ -25,5 +25,9 @@ public class UserService {
         UserId userId = repository.nextId();
         User user = new User(userId, createUserParameters.email(),createUserParameters.authServerId(),createUserParameters.mobileToken());
         return repository.save(user);
+    }
+
+    public Optional<User> getUserById(UserId userId) {
+        return repository.findById(userId);
     }
 }

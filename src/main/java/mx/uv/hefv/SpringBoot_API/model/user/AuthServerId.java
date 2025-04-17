@@ -1,4 +1,4 @@
-package mx.uv.hefv.SpringBoot_API.model;
+package mx.uv.hefv.SpringBoot_API.model.user;
 
 import java.util.UUID;
 

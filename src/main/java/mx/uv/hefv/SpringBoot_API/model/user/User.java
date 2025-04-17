@@ -1,4 +1,4 @@
-package mx.uv.hefv.SpringBoot_API.model;
+package mx.uv.hefv.SpringBoot_API.model.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

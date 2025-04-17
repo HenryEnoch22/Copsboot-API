@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import mx.uv.hefv.SpringBoot_API.dto.UserDto;
-import mx.uv.hefv.SpringBoot_API.model.AuthServerId;
-import mx.uv.hefv.SpringBoot_API.model.CreateUserParameters;
-import mx.uv.hefv.SpringBoot_API.model.User;
+import mx.uv.hefv.SpringBoot_API.model.user.AuthServerId;
+import mx.uv.hefv.SpringBoot_API.model.user.CreateUserParameters;
+import mx.uv.hefv.SpringBoot_API.model.user.User;
 import mx.uv.hefv.SpringBoot_API.service.user.UserService;
 
 @RestController
@@ -45,7 +46,7 @@ public class UserRestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) 
     @PreAuthorize("hasRole('OFFICER')")
-    public UserDto createUser(@AuthenticationPrincipal Jwt jwt, @RequestBody CreateUserRequest request) {
+    public UserDto createUser(@AuthenticationPrincipal Jwt jwt,@Valid @RequestBody CreateUserRequest request) {
     
         CreateUserParameters parameters = request.toParameters(jwt); 
         User user = userService.createUser(parameters);
