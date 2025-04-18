@@ -1,8 +1,9 @@
 package mx.uv.hefv.SpringBoot_API.repository.report;
 
-import jakarta.persistence.EntityManager;
-import mx.uv.hefv.SpringBoot_API.model.report.Report;
+import mx.uv.hefv.SpringBoot_API.jpa.UniqueIdGenerator;
 import mx.uv.hefv.SpringBoot_API.model.report.ReportId;
+
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,19 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ReportRepositoryImpl implements ReportRepositoryCustom {
 
-    private final EntityManager entityManager;
+     private final UniqueIdGenerator<UUID> generator;
 
-    public ReportRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public ReportRepositoryImpl(UniqueIdGenerator<UUID> generator) {
+        this.generator = generator;
     }
 
     @Override
-    public Report findCustomById(ReportId id) {
-        return entityManager.find(Report.class, id.getId());
-    }
-
-    @Override
-    public void saveCustom(Report report) {
-        entityManager.merge(report);
+    public ReportId nextId() {
+        return new ReportId(generator.getNextUniqueId());
     }
 }
