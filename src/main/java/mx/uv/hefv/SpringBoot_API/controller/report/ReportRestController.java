@@ -19,6 +19,7 @@ import mx.uv.hefv.SpringBoot_API.model.user.AuthServerId;
 import mx.uv.hefv.SpringBoot_API.model.user.User;
 import mx.uv.hefv.SpringBoot_API.service.report.ReportService;
 import mx.uv.hefv.SpringBoot_API.service.user.UserService;
+import mx.uv.hefv.SpringBoot_API.model.user.UserNotFoundException;
 
 
 
@@ -40,7 +41,7 @@ public class ReportRestController {
                                   @Valid @RequestBody CreateReportRequest request) {
         AuthServerId authServerId = new AuthServerId(UUID.fromString(jwt.getSubject()));
         User user = userService.findUserByAuthServerId(authServerId)
-                .orElseThrow(() -> new mx.uv.hefv.SpringBoot_API.model.user.UserNotFoundException(authServerId));
+                .orElseThrow(() -> new UserNotFoundException(authServerId));
         CreateReportParameters parameters = request.toParameters(user.getId());
         Report report = service.createReport(parameters);
         return ReportDto.fromReport(report, userService);
