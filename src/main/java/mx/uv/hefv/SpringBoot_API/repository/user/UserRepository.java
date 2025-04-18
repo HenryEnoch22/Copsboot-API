@@ -13,4 +13,6 @@ import mx.uv.hefv.SpringBoot_API.model.user.User;
 
 public interface UserRepository extends CrudRepository<User, UserId>, UserRepositoryCustom{
     Optional<User> findByAuthServerId(AuthServerId authServerId);
+
+    Optional<User> findByMobileToken(String mobileToken);
 }

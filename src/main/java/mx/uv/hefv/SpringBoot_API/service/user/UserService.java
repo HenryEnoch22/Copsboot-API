@@ -30,4 +30,8 @@ public class UserService {
     public Optional<User> getUserById(UserId userId) {
         return repository.findById(userId);
     }
+    
+    public Optional<User> findUserByMobileToken(String mobileToken) {
+        return repository.findByMobileToken(mobileToken);
+    }
 }
